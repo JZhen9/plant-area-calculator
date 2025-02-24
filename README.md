@@ -62,7 +62,10 @@ python scale.py --input Sample/scale.JPG
 ```
 ![alt text](image.png)
 ```bash
+# batch figure
 python main.py --input Sample/fig --output Sample/fig/result --pixels_per_cm 661.34 --min_area_cm 0.01
+# single figure
+python main.py --input Sample/fig.jpg --output Sample/result --pixels_per_cm 661.34 --min_area_cm 0.01
 ```
 
 ---

@@ -109,20 +109,30 @@ def process_images_in_directory(input_directory, output_directory, count, pixels
     # Ensure output directory exists
     os.makedirs(output_directory, exist_ok=True)
     
-    # Process each image in the input directory
-    for filename in sorted(os.listdir(input_directory)):
-        if filename.lower().endswith((".jpg", ".png")):
-            # Construct full input and output paths
-            input_path = os.path.join(input_directory, filename)
-            
-            with open(f'{output_directory}/data.txt', 'a') as file:
-                file.write(filename + "\n")
-            
-            # Process the image to detect green areas
-            calculate_green_area(input_path, output_directory, count, pixels_per_cm,
-                                    lower_green, upper_green, 
-                                    min_area, text_file, 
-                                    font_scale, text_color)
+    if input_directory.lower().endswith((".jpg", ".png")):
+        with open(f'{output_directory}/data.txt', 'a') as file:
+                    file.write(input_directory + "\n")
+                
+        # Process the image to detect green areas
+        calculate_green_area(input_directory, output_directory, count, pixels_per_cm,
+                                lower_green, upper_green, 
+                                min_area, text_file, 
+                                font_scale, text_color)
+    else:
+        # Process each image in the input directory
+        for filename in sorted(os.listdir(input_directory)):
+            if filename.lower().endswith((".jpg", ".png")):
+                # Construct full input and output paths
+                input_path = os.path.join(input_directory, filename)
+                
+                with open(f'{output_directory}/data.txt', 'a') as file:
+                    file.write(filename + "\n")
+                
+                # Process the image to detect green areas
+                calculate_green_area(input_path, output_directory, count, pixels_per_cm,
+                                        lower_green, upper_green, 
+                                        min_area, text_file, 
+                                        font_scale, text_color)
 
 if __name__ == '__main__':
     main()
